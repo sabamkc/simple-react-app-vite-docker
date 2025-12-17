@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  frontend-dev:
+    container_name: vite-react-dev
+    build:
+      context: .
+      target: dev
+    profiles: ["dev"]
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  frontend-prod:
+    container_name: vite-react-prod
+    build:
+      context: .
+      target: prod
+    profiles: ["prod"]
+    ports:
+      - "8080:80"
